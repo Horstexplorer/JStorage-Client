@@ -1,9 +1,14 @@
 plugins {
     id 'java'
+    id'application'
+    id'com.github.johnrengelman.shadow' version '6.0.0'
 }
 
+compileJava.options.encoding = 'UTF-8'
 group 'de.netbeacon'
 version '1.0-SNAPSHOT'
+
+sourceCompatibility = 13
 
 repositories {
     mavenCentral()
