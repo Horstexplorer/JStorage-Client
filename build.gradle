@@ -6,7 +6,6 @@ plugins {
 
 compileJava.options.encoding = 'UTF-8'
 group 'de.netbeacon'
-version '1.0-SNAPSHOT'
 
 sourceCompatibility = 13
 
@@ -31,4 +30,10 @@ dependencies {
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.2'
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.6.2'
+}
+
+jar {
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
