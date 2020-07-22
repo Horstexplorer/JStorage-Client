@@ -18,8 +18,10 @@ package de.netbeacon.jstorage.client;
 
 import de.netbeacon.jstorage.client.executor.ScalingExecutor;
 import de.netbeacon.jstorage.client.interceptor.RateLimitInterceptor;
+import de.netbeacon.jstorage.client.request.JStorageRequest;
 import de.netbeacon.jstorage.client.request.JStorageRequestBuilder;
 import de.netbeacon.jstorage.client.request.RequestType;
+import de.netbeacon.jstorage.client.result.JStorageResult;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 
@@ -229,6 +231,24 @@ public class JStorageClient {
     public void setLogin(String userId, String password){
         this.userId = userId;
         this.password = password;
+    }
+
+    /**
+     * Can be used to check if any of the credentials are correct
+     * <br>
+     * This will always prefer testing the token
+     *
+     * @return true on success, false if any failed
+     */
+    public boolean testConnection(){
+        JStorageRequestBuilder requestBuilder = this.newRequest(RequestType.InfoAction_Basic);
+        JStorageRequest request = requestBuilder.build();
+        try{
+            JStorageResult result = request.complete();
+            return result.getResultRaw().length > 0;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     /**
