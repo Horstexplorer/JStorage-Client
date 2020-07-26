@@ -1,7 +1,7 @@
 # JStorage-Client
 ###### Java Client For JStorage
->Version: 1.0.1_2  
->ServerVersion: 1.4.0_20
+>Version: 1.0.2_3  
+>ServerVersion: 1.5.3_24
 
 ## Usage
 Create a new client
