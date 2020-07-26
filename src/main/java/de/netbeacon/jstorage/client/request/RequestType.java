@@ -57,6 +57,10 @@ public enum RequestType {
     DataAction_GetDataSet(Arrays.asList("data", "db", "table", "dataset", "get"), "GET", Arrays.asList("database", "table", "identifier"), false, 1),
     DataAction_GetDataType(Arrays.asList("data", "db", "table", "dataset", "datatype", "get"), "GET", Arrays.asList("database", "table", "dataset", "identifier"), false, 1),
 
+    DataAction_UpdateDataType(Arrays.asList("data", "db", "table", "dataset", "datatype", "update"), "PUT", Arrays.asList("database", "table", "dataset", "identifier"), true, 1),
+
+    DataAction_MultiSelect(Arrays.asList("data", "tool", "multiselect"), "PUT", Arrays.asList(), true, 1),
+
     /*          Info Action         */
 
     InfoAction_Basic(Arrays.asList("info", "basic", "info"), "GET", Arrays.asList(), false, -1),
