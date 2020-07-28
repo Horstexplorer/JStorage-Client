@@ -72,6 +72,10 @@ public class NotificationSocket implements Runnable {
         while(retry.get()){
             try{
                 retry.set(false); // disable
+                // check if token is available
+                if(notificationManager.getJStorageClient().getLoginToken() == null){
+                    throw new Exception("No Token Found");
+                }
                 // open connection
                 SSLSocketFactory sslSocketFactory;
                 if(unsecure){
