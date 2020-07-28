@@ -18,6 +18,9 @@ package de.netbeacon.jstorage.client.notification.objects;
 
 import org.json.JSONObject;
 
+/**
+ * This class represents a received notification
+ */
 public class DataNotification {
 
     public enum Content{

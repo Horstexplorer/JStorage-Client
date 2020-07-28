@@ -36,6 +36,9 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * Takes care of requesting & receiving the notifications
+ */
 public class NotificationSocket implements Runnable {
 
     private final NotificationManager notificationManager;
@@ -47,6 +50,13 @@ public class NotificationSocket implements Runnable {
 
     private final Logger logger = LoggerFactory.getLogger(NotificationSocket.class);
 
+    /**
+     * Creates a new instance of this class
+     * @param notificationManager the superordinate notification manager
+     * @param selectedNotifications the selection
+     * @param port the port
+     * @param unsecure if ssl error should be ignored
+     */
     public NotificationSocket(NotificationManager notificationManager, HashMap<String, ArrayList<String>> selectedNotifications, int port, boolean unsecure){
         this.notificationManager = notificationManager;
         this.selectedNotifications = selectedNotifications;

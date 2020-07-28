@@ -16,8 +16,15 @@
 
 package de.netbeacon.jstorage.client.notification.objects;
 
+/**
+ * Listener class
+ */
 public interface NotificationListener {
 
+    /**
+     * Will be executed on each incoming DataNotification for further evaluation
+     * @param dataNotification notification
+     */
     void onNotification(DataNotification dataNotification);
 
 }
