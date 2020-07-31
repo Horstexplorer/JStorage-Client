@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package de.netbeacon.jstorage.client.notification.objects;
+package de.netbeacon.jstorage.client.notification.objects.listener;
+
+import de.netbeacon.jstorage.client.notification.objects.notifiation.DataNotification;
 
 /**
  * Listener class
