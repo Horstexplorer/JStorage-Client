@@ -53,16 +53,18 @@ public class JStorageRequestBuilder {
      * @param key key
      * @param value value
      */
-    public void setArg(String key, String value){
+    public JStorageRequestBuilder setArg(String key, String value){
         args.put(key.toLowerCase(), value);
+        return this;
     }
 
     /**
      * Can be used to add a payload to the request
      * @param jsonObject payload
      */
-    public void setPayload(JSONObject jsonObject){
+    public JStorageRequestBuilder setPayload(JSONObject jsonObject){
         this.payload = jsonObject;
+        return this;
     }
 
     /**

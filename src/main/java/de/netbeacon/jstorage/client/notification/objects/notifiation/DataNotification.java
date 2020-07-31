@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.jstorage.client.notification.objects;
+package de.netbeacon.jstorage.client.notification.objects.notifiation;
 
 import org.json.JSONObject;
 

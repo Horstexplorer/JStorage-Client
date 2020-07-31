@@ -17,9 +17,9 @@
 package de.netbeacon.jstorage.client.notification;
 
 import de.netbeacon.jstorage.client.JStorageClient;
-import de.netbeacon.jstorage.client.notification.objects.DataNotification;
-import de.netbeacon.jstorage.client.notification.objects.NotificationListener;
-import de.netbeacon.jstorage.client.notification.objects.NotificationSocket;
+import de.netbeacon.jstorage.client.notification.objects.connection.NotificationConnection;
+import de.netbeacon.jstorage.client.notification.objects.notifiation.DataNotification;
+import de.netbeacon.jstorage.client.notification.objects.listener.NotificationListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +31,7 @@ public class NotificationManager {
 
     private final JStorageClient jStorageClient;
     private final ArrayList<NotificationListener> notificationListeners = new ArrayList<>();
-    private Thread notificationSocketThread;
+    private NotificationConnection notificationConnection;
 
     /**
      * Creates a new instance of this class
@@ -43,27 +43,28 @@ public class NotificationManager {
 
     /**
      * Start receiving notifications with the given settings
-     * @param selectedNotifications containing the selection
-     * @param port port
-     * @param unsecure ignores ssl errors
+     * @param selectedNotifications notifications to receive
+     * @param port port of the notification socket
+     * @param unsecureSSL use unsecure ssl
+     * @return boolean, true on successful start
      */
-    public void start(HashMap<String, ArrayList<String>> selectedNotifications, int port, boolean unsecure){
+    public boolean start(HashMap<String, ArrayList<String>> selectedNotifications, int port, boolean unsecureSSL){
         // stop old
-        if(notificationSocketThread != null){
-            notificationSocketThread.interrupt();
+        if(notificationConnection != null){
+            notificationConnection.disconnect();
         }
         // start new
-        notificationSocketThread = new Thread(new NotificationSocket(this, selectedNotifications, port, unsecure));
-        notificationSocketThread.setDaemon(true);
-        notificationSocketThread.start();
+        notificationConnection = new NotificationConnection(this, selectedNotifications, port);
+        notificationConnection.setUnsecureSSL(unsecureSSL);
+        return notificationConnection.connect();
     }
 
     /**
      * Stop recieving notifications
      */
     public void stop(){
-        if(notificationSocketThread != null){
-            notificationSocketThread.interrupt();
+        if(notificationConnection != null){
+            notificationConnection.disconnect();
         }
     }
 
